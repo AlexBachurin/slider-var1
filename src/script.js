@@ -47,7 +47,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     // **** DOTS ****
+    //incase we want to dynamically create dots, depending on slides length
+    class Dot {
+        constructor() {
 
+        }
+
+        render() {
+            const dot = document.createElement('div');
+            dot.classList.add('slider__dot');
+
+            const parent = document.querySelector('.slider__dot-container');
+            parent.append(dot);
+        }
+    }
+
+    const length = slides.length;
+
+    function createDots(num) {
+        for (let i = 0; i < num; i++) {
+            new Dot().render();
+        }
+    }
+
+    createDots(length);
     
     //get elems
     const dotsContainer = document.querySelector('.slider__dot-container'),
