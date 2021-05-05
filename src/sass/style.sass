@@ -52,3 +52,20 @@ body
             display: flex
             justify-content: center
             gap: 10px
+
+    &__dot
+        width: 15px
+        height: 15px
+        background-color: rgba(255, 255, 255, 0.5)
+        cursor: pointer
+        &-container
+            position: absolute
+            bottom: 20px
+            left: 50%
+            transform: translateX(-50%)
+            display: flex
+            gap: 8px
+
+.active-dot
+    background-color: rgba(255, 255, 255, 0.8)
+        

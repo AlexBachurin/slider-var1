@@ -13,9 +13,11 @@ window.addEventListener('DOMContentLoaded', () => {
             //reset to first slide
             counter = 0;
             moveSlide();
+            addActiveToDot(counter);
         } else {
             counter++;
             moveSlide();
+            addActiveToDot(counter);
         }          
     })
 
@@ -26,10 +28,12 @@ window.addEventListener('DOMContentLoaded', () => {
             //reset to last
             counter = slides.length - 1;
             moveSlide();
+            addActiveToDot(counter);
             
         } else {
             counter--;
             moveSlide();
+            addActiveToDot(counter);
         }
     })
 
@@ -37,6 +41,49 @@ window.addEventListener('DOMContentLoaded', () => {
     function moveSlide() {
         slides.forEach(slide => {
             slide.style.transform = `translateX(-${counter*100}%)`;
+        })
+    }
+    
+
+
+    // **** DOTS ****
+
+    
+    //get elems
+    const dotsContainer = document.querySelector('.slider__dot-container'),
+          dots = document.querySelectorAll('.slider__dot');
+    
+    //setup initial active class
+    addActiveToDot(counter);
+    
+    //event listener
+    dotsContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        //if we clicked on dot
+        if (target.classList.contains('slider__dot')) {
+            //iterate through dots array, remove all active classes, check what dot is targeted, add active class to this dot and set counter to position of this dot
+            //e.g if we clicked on last dot, counter now equals 3
+            dots.forEach((dot,i) => {
+                dot.classList.remove('active-dot');
+                if (target === dot) {
+                    dot.classList.add('active-dot');
+                    counter = i;
+                    moveSlide();
+                }
+            })
+        }
+    })
+
+
+    //add active dot to class, depending on current counter value
+    function addActiveToDot(number) {
+        //iterate through dots array, remove active class from all dots and add only to item that have same value as counter
+        //e.g. if counter 3, we will add active class to last dot
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active-dot');
+            if (number === i) {
+                dot.classList.add('active-dot');
+            }
         })
     }
 })
